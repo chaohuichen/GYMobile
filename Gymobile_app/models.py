@@ -4,7 +4,7 @@ from datetime import datetime,timedelta
 class Day(models.Model):
     "A day the user is having"
     #day = models.DateTimeField(default=datetime.now()+timedelta(days=30))
-    day= models.DateTimeField(default=datetime.now())
+    day = models.DateTimeField(default=datetime.now())
 
     def __str__(self):
         "..return"
