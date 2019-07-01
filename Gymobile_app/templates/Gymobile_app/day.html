@@ -1,0 +1,19 @@
+{% extends 'Gymobile_app/base.html'%}
+{%block content%}
+  <p>Day:{{ day }}</p>
+
+  <p>Exercises:</p>
+  <ul>
+  {% for exercise in exercises %}
+    <li>
+      <p>{{ exercise.date_added|date:'M d,Y H:i' }}</P>
+      <p>{{ exercise.exercise}}</P>
+    </li>
+  {%empty%}
+    <li>
+      There are no exercise for this Day yet.
+    </li>
+  {% endfor %}
+  </ul>
+
+  {%endblock content%}

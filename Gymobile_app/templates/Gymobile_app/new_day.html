@@ -1,0 +1,11 @@
+{% extends 'Gymobile_app/base.html'%}
+{%block content%}
+  <p>Add A New Day:</p>
+
+  <form action="{%url 'Gymobile_app:new_day'%}" method = 'post'>
+    {% csrf_token %}
+    {{form.as_p }}
+    <button name="submit">add new day</button>
+  </form>
+
+{%endblock content%}
