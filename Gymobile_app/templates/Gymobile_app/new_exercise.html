@@ -1,0 +1,13 @@
+{% extends "Gymobile_app/base.html" %}
+{% block content %}
+
+  <p><a href="{% url 'Gymobile_app:day' day.id %}">{{ day }}</a></p>
+
+  <p>Add a new exercise:</p>
+  <form action="{% url 'Gymobile_app:new_exercise' day.id %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name='submit'>add exercise</button>
+  </form>
+
+{% endblock content %}

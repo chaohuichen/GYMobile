@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from.models import Workout,Day
-from .forms import DayForm
+from .models import Workout,Day
+from .forms import DayForm,WorkoutForm
 
 def index(request):
     """Home page"""
@@ -36,6 +36,42 @@ def new_day(request):
 
     context = {'form':form}
     return render(request, 'Gymobile_app/new_day.html',context)
+
+def new_exercise(request,day_id):
+    """add an exercise for a particular day"""
+    day = Day.objects.get(id=day_id)
+    if request.method != 'POST':
+        #No data submitted; create a blank form.
+        form=WorkoutForm()
+    else:
+        #POST data submitted;process data.
+        form = WorkoutForm(data=request.POST)
+        if form.is_valid():
+            new_exercise=form.save(commit=False)
+            new_exercise.day=day
+            new_exercise.save()
+            return HttpResponseRedirect(reverse('Gymobile_app:day',
+                                                args=[day_id]))
+    context={'day':day,'form':form}
+    return render(request,'Gymobile_app/new_exercise.html',context)
+
+def edit_exercise(request,workout_id):
+    """Edit an exisiting entry"""
+    workout = Workout.objects.get(id=workout_id)
+    day = workout.day
+
+    if request.method != 'POST':
+        #No data submitted; create a blank form.
+        form=WorkoutForm(instance=workout)
+    else:
+        #POST data submitted;process data.
+        form = WorkoutForm(instance=workout,data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('Gymobile_app:day',
+                                                args=[day.id]))
+    context={'workout':workout,'day': day,'form':form }
+    return render(request,'Gymobile_app/edit_exercise.html',context)
 
 def profile(request):
     """Profile page"""

@@ -3,11 +3,17 @@
   <p>Day:{{ day }}</p>
 
   <p>Exercises:</p>
+  <p>
+    <a href="{% url 'Gymobile_app:new_exercise' day.id %}">add new exercise</a>
+  </p>
   <ul>
   {% for exercise in exercises %}
     <li>
       <p>{{ exercise.date_added|date:'M d,Y H:i' }}</P>
       <p>{{ exercise.exercise}}</P>
+      <p>
+        <a href="{% url 'Gymobile_app:edit_exercise' exercise.id %}">edit exercise</a>
+      </p>
     </li>
   {%empty%}
     <li>
