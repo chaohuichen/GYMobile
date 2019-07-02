@@ -20,4 +20,5 @@ urlpatterns = [
 	path('Gymobile_app/', include('Gymobile_app.urls')),
     path('admin/', admin.site.urls),
 	path('', include('Gymobile_app.urls', namespace='Gymobile_app')),
+    path('users/', include('users.urls', namespace='users')),
 ]

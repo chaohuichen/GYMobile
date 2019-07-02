@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from datetime import datetime,timedelta
 # Create your models here.
 class Day(models.Model):
@@ -13,7 +14,7 @@ class Day(models.Model):
 
     day = models.IntegerField(('Workout day'), unique=True,default=number)
     date_added = models.DateTimeField(auto_now_add=True)
-    #owner = models.ForeignKey(User,on_delete=models.CASCADE)
+    owner = models.ForeignKey(User,on_delete=models.CASCADE)
     def __str__(self):
         "..return"
         return 'Workout Day '+str(self.day)
