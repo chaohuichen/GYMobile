@@ -1,12 +1,13 @@
 {% extends "Gymobile_app/base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
   <form method="post" action="{% url 'users:register' %}">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form|crispy }}
 
-    <button name="submit">register</button>
+    <button class="btn btn-mb btn-primary" name="submit">register</button>
     <input type="hidden" name="next" value="{% url 'Gymobile_app:index' %}" />
   </form>
 
