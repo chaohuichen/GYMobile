@@ -10,7 +10,7 @@
     {% csrf_token %}
     {{ form.as_p }}
 
-    <button name="submit">log in</button>
+    <button name="submit">Log In</button>
     <input type="hidden" name="next"
       value="{% url 'Gymobile_app:index' %}" />
   </form>
