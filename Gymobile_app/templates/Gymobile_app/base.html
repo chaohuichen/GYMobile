@@ -24,19 +24,21 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="Gymobile_app:days">Days</a>
+            <a class="nav-link" href="{%url 'Gymobile_app:days' %}">Days</a>
           </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
           {%if user.is_authenticated%}
-            Hello,{{user.username }}.
+            <li class="nav-item"><a class="nav-link">Hello,{{user.username }}.</a></li>
             <li class="nav-item">
-              <a class="nav-link" href="{%url 'users:logout' %}">log out</a>
+              <a class="nav-link" href="{%url 'users:logout' %}">Log out</a>
             </li>
           {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="{%url 'users:register' %}">register</a>
+              <a class="nav-link" href="{%url 'users:register' %}">Register</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{%url 'users:login' %}">login</a>
+              <a class="nav-link" href="{%url 'users:login' %}">Login</a>
             </li>
           {% endif %}
           <li class="nav-item dropdown">
