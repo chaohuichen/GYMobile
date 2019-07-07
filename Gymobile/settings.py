@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     #My apps
     'Gymobile_app',
     'users',
+
+    #loading cripy forms to the app
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +133,6 @@ STATIC_URL = '/static/'
 
 #My settings
 LOGIN_URL='/users/login'
+
+#using bootstrap4 as the default template for crispy forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
