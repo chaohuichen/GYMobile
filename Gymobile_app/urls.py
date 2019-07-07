@@ -1,5 +1,8 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+from users import views as user_views
 
 app_name='Gymobile_app'
 
@@ -16,4 +19,5 @@ urlpatterns = [
 
 	#adding a map route
 	path('map/', views.map, name='map'),
+
 ]

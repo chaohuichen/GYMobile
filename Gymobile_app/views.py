@@ -87,14 +87,6 @@ def edit_exercise(request,workout_id):
     context={'workout':workout,'day': day,'form':form }
     return render(request,'Gymobile_app/edit_exercise.html',context)
 
-def profile(request):
-    """Profile page"""
-    return render(request,'Gymobile_app/index.html')
-
-def account(request):
-    """Account page"""
-    return render(request,'Gymobile_app/index.html')
-
 #creating a map view
 @login_required
 def map(request):
