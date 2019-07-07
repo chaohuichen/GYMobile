@@ -1,9 +1,10 @@
 {% extends "Gymobile_app/base.html"%}
+{% load staticfiles %}
 
 {% block content %}
-
+<br>
+<div class="container">
   <p>Days</p>
-
   <ul>
     {% for day in days %}
       <li>
@@ -14,4 +15,5 @@
     {% endfor %}
   </ul>
   <a href="{%url 'Gymobile_app:new_day'%}">Add a new Day:</a>
+</div>
 {% endblock content%}
