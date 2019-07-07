@@ -13,4 +13,7 @@ urlpatterns = [
 	path('new_exercise/(P<day_id>\d+)', views.new_exercise, name='new_exercise'),
 
 	path('edit_exercise/(P<workout_id>\d+)', views.edit_exercise, name='edit_exercise'),
+
+	#adding a map route
+	path('map/', views.map, name='map'),
 ]
