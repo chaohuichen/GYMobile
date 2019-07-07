@@ -94,3 +94,8 @@ def profile(request):
 def account(request):
     """Account page"""
     return render(request,'Gymobile_app/index.html')
+
+#creating a map view
+@login_required
+def map(request):
+    return render(request, 'Gymobile_app/map.html')
