@@ -10,7 +10,8 @@ from .forms import UserRegisterForm,UserUpdateForm,ProfileUpdateForm
 def logout_view(request):
     """Log the user out."""
     logout(request)
-    return HttpResponseRedirect(reverse('Gymobile_app:index'))
+    messages.success(request,f'You have Logout!')
+    return redirect('Gymobile_app:index')
 
 def register(request):
     """register a new user."""
@@ -19,15 +20,18 @@ def register(request):
         form = UserRegisterForm()
     else:
         #process completed form
-        form = UserRegisterForm(data=request.POST)
+        form = UserRegisterForm(request.POST)
 
         if form.is_valid():
-            new_user = form.save()
+            form.save()
+            #new_user=form.save()
             #log the user in then redirect to home page.
-            authenticate_user = authenticate(username=new_user.username,
-                password = request.POST['password1'])
-            login(request,authenticate_user)
-            return HttpResponseRedirect(reverse('Gymobile_app:index'))
+            username = form.cleaned_data.get('username')
+            #authenticate_user = authenticate(username=new_user.username,
+                #password = request.POST['password1'])
+            messages.success(request,f'Your account has been created! You are now able to log in')
+            #login(request,authenticate_user)
+            return redirect('login')
 
     context = {'form':form}
     return render(request,'users/register.html',context)
@@ -35,6 +39,10 @@ def register(request):
 @login_required
 def profile(request):
     """Profile page"""
+    return render(request,'users/profile.html')
+
+@login_required
+def edit_profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST,
@@ -47,12 +55,9 @@ def profile(request):
             return redirect('profile')
     else:
         u_form = UserUpdateForm(instance=request.user)
-        p_form=ProfileUpdateForm(instance=request.user.profile)
-
+        p_form = ProfileUpdateForm(instance=request.user.profile)
     context = {
     'u_form': u_form,
     'p_form': p_form
     }
-    return render(request,'users/profile.html',context)
-
-#def edit_profile(request):
+    return render(request,'users/edit_profile.html',context)
