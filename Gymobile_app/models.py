@@ -12,7 +12,7 @@ class Day(models.Model):
         else:
             return no + 1
 
-    day = models.IntegerField(('Workout day'), unique=True,default=number)
+    day = models.IntegerField(('Workout day'), unique=True,default='')
     date_added = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User,on_delete=models.CASCADE)
     def __str__(self):
@@ -21,10 +21,10 @@ class Day(models.Model):
 
 class Workout(models.Model):
     "workout type"
-    Back='Back Day'
-    Leg='Legs Day'
-    Shoulder='Shoulder Day'
-    Chest='Chest Day'
+    Back='Back Exercies'
+    Leg='Legs Exercies'
+    Shoulder='Shoulder Exercies'
+    Chest='Chest Exercies'
     type_of_workout=[
     (Back,'Back'),
     (Leg,'Leg'),

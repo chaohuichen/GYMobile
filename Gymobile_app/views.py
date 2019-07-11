@@ -20,7 +20,7 @@ def days(request):
 @login_required
 def day(request,day_id):
     """show a single workout and all its work"""
-    day= Day.objects.get(id=day_id)
+    day= get_object_or_404(Day,id=day_id)
     # Make sure the day belongs to current user.
     if day.owner !=request.user:
         raise Http404
@@ -71,7 +71,7 @@ def edit_exercise(request,workout_id):
     """Edit an exisiting entry"""
     workout = Workout.objects.get(id=workout_id)
     day = workout.day
-    if workout.owner !=request.user:
+    if day.owner !=request.user:
         raise Http404
 
     if request.method != 'POST':
@@ -87,6 +87,15 @@ def edit_exercise(request,workout_id):
     context={'workout':workout,'day': day,'form':form }
     return render(request,'Gymobile_app/edit_exercise.html',context)
 
+@login_required
+def delete_exercise(request,day_id):
+    workout = Workout.objects.get(id=workout_id)
+    day = workout.day
+    if day.owner !=request.user:
+        raise Http404
+
+    workout.delete()
+    return render(request,'Gymobile_app/edit_exercise.html',context)
 #creating a map view
 @login_required
 def map(request):
