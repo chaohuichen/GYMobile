@@ -138,3 +138,16 @@ LOGIN_REDIRECT_URL = 'Gymobile_app:index'
 LOGIN_URL='login'
 #using bootstrap4 as the default template for crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('DB_USER')
+print(EMAIL_HOST_USER)
+#'chenpeter0821@gmail.com'
+#os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('DB_PASS')
+print(EMAIL_HOST_PASSWORD)
+#'gajwdipmbujstzyd'
+#os.environ.get('EMAIL_PASS')
