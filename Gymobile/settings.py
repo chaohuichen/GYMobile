@@ -37,12 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    #Thrid party apps
-    #'bootstrap3',
     #My apps
-    'Gymobile_app',
-    'users',
+    'Gymblog.apps.GymblogConfig',
+    'users.apps.UsersConfig',
+    'Gymobile_app.apps.GymobileAppConfig',
 
     #loading cripy forms to the app
     'crispy_forms',
@@ -131,8 +129,12 @@ STATICFILES_DIRS = [
 
 STATIC_URL = '/static/'
 
-#My settings
-LOGIN_URL='/users/login'
+#profile img location
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
 
+#My settings
+LOGIN_REDIRECT_URL = 'Gymobile_app:index'
+LOGIN_URL='login'
 #using bootstrap4 as the default template for crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
