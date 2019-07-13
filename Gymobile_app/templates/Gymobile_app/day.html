@@ -1,25 +1,30 @@
 {% extends 'Gymobile_app/base.html'%}
+
 {%block content%}
+<br>
+<div class="container text-center">
   <p>Day:{{ day }}</p>
-
+    <a href="{% url 'Gymobile_app:new_exercise' day.id %}" 
+        class="btn btn-primary my-1" role="button">Add new exercise</a>
+        <a href="{% url 'Gymobile_app:days' %}" 
+        class="btn btn-danger my-1" role="button">Cancel</a>
   <p>Exercises:</p>
-  <p>
-    <a href="{% url 'Gymobile_app:new_exercise' day.id %}">add new exercise</a>
-  </p>
-  <ul>
-  {% for exercise in exercises %}
-    <li>
-      <p>{{ exercise.date_added|date:'M d,Y H:i' }}</P>
-      <p>{{ exercise.exercise}}</P>
-      <p>
-        <a href="{% url 'Gymobile_app:edit_exercise' exercise.id %}">edit exercise</a>
-      </p>
-    </li>
-  {%empty%}
-    <li>
-      There are no exercise for this Day yet.
-    </li>
-  {% endfor %}
-  </ul>
-
-  {%endblock content%}
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-6">
+        {% for exercise in exercises %}
+        <br>
+        <div class="card">
+          <div class="card-body">
+            <p>{{ exercise.date_added|date:'M d,Y H:i' }}</P>
+            <h5>{{ exercise.exercise}}</h5>
+                <a href="{% url 'Gymobile_app:edit_exercise' exercise.id %}" 
+                    class="btn btn-primary my-1" role="button">edit exercise</a>
+          </div>
+        </div>
+        {% empty %}
+          <P> No workouts have been added yet.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endblock content %}

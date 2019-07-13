@@ -1,13 +1,31 @@
 {% extends "Gymobile_app/base.html" %}
+{% load crispy_forms_tags %}
+
 {% block content %}
 
-  <p><a href="{% url 'Gymobile_app:day' day.id %}">{{ day }}</a></p>
-
-  <p>Add a new exercise:</p>
   <form action="{% url 'Gymobile_app:new_exercise' day.id %}" method='post'>
     {% csrf_token %}
-    {{ form.as_p }}
-    <button name='submit'>add exercise</button>
+    <br>
+      <div class="container col-md-4">
+          <div class="card ">
+              <div class="card-header">
+                  <h3>Add a new exercise:</h3>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                    {{form|crispy}}
+                  </div>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col text-center">
+                          <button type="submit" class="btn btn-primary my-1">Add exercise</button>
+                          <a href="{% url 'Gymobile_app:day' day.id %}" 
+                              class="btn btn-danger my-1" role="button">cancel</a>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
   </form>
-
 {% endblock content %}
