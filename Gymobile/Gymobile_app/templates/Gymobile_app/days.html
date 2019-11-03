@@ -1,0 +1,27 @@
+{% extends "Gymobile_app/base.html"%}
+{% load staticfiles %}
+
+{% block content %}
+<br>
+<div class="container">
+  <p>Workout History</p>
+  <a class="btn btn-primary" href="{%url 'Gymobile_app:new_day'%}" role="button">Add a new Day:</a>
+  
+  <div  class="container"id="daylist">
+    <div class="row">
+      <div class="col-md-4 overflow-auto">
+        {% for day in days %}
+          <br>
+          <div class="card">
+            <div class="card-body">
+              <a href ="{% url 'Gymobile_app:day' day.id %}">{{ day }}</a>
+            </div>
+          </div>
+        {% empty %}
+          <P> No workouts have been added yet.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content%}
