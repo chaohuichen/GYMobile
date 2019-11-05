@@ -2,12 +2,14 @@
 {% load staticfiles %}
 
 {% block content %}
+
 <br>
 <div class="container">
-  <p>Workout History</p>
-  <a class="btn btn-primary" href="{%url 'Gymobile_app:new_day'%}" role="button">Add a new Day:</a>
-  
-  <div  class="container"id="daylist">
+  <h1><strong>Workout History:</h1>
+    <!-- change the day to workout id-->
+  <a class="btn btn-primary" href="{%url 'Gymobile_app:new_day'%}" role="button">Start an Empty Workout: </a>
+
+  <div  class="container" id="daylist">
     <div class="row">
       <div class="col-md-4 overflow-auto">
         {% for day in days %}

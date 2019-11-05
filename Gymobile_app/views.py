@@ -3,8 +3,8 @@ from django.http import HttpResponseRedirect,Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .models import Workout,Day
-from .forms import DayForm,WorkoutForm
+from .models import Exercies,WorkoutLog
+from .forms import ExerciesForm,WorkoutLogForm
 
 def index(request):
     """Home page"""
@@ -13,14 +13,14 @@ def index(request):
 @login_required
 def days(request):
     """show all the workouts"""
-    days = Day.objects.filter(owner=request.user).order_by('date_added')
+    days = WorkoutLog.objects.filter(owner=request.user).order_by('date_added')
     context = {'days': days}
     return render(request,'Gymobile_app/days.html',context)
 
 @login_required
 def day(request,day_id):
     """show a single workout and all its work"""
-    day= get_object_or_404(Day,id=day_id)
+    day= get_object_or_404(WorkoutLog,id=day_id)
     # Make sure the day belongs to current user.
     if day.owner !=request.user:
         raise Http404
@@ -34,10 +34,10 @@ def new_day(request):
     """Add a new day."""
     if request.method != 'POST':
         #No data submitted; create a blank form.
-        form=DayForm()
+        form=WorkoutLogForm()
     else:
         #POST data submitted;process data.
-        form = DayForm(request.POST)
+        form = WorkoutLogForm(request.POST)
         if form.is_valid():
             new_day=form.save(commit=False)
             new_day.owner=request.user
@@ -50,13 +50,13 @@ def new_day(request):
 @login_required
 def new_exercise(request,day_id):
     """add an exercise for a particular day"""
-    day = Day.objects.get(id=day_id)
+    day = WorkoutLog.objects.get(id=day_id)
     if request.method != 'POST':
         #No data submitted; create a blank form.
-        form=WorkoutForm()
+        form=ExerciesForm()
     else:
         #POST data submitted;process data.
-        form = WorkoutForm(data=request.POST)
+        form = ExerciesForm(data=request.POST)
         if form.is_valid():
             new_exercise=form.save(commit=False)
             new_exercise.day=day
@@ -69,17 +69,17 @@ def new_exercise(request,day_id):
 @login_required
 def edit_exercise(request,workout_id):
     """Edit an exisiting entry"""
-    workout = Workout.objects.get(id=workout_id)
+    workout = Exercies.objects.get(id=workout_id)
     day = workout.day
     if day.owner !=request.user:
         raise Http404
 
     if request.method != 'POST':
         #No data submitted; create a blank form.
-        form=WorkoutForm(instance=workout)
+        form=ExerciesForm(instance=workout)
     else:
         #POST data submitted;process data.
-        form = WorkoutForm(instance=workout,data=request.POST)
+        form = ExerciesForm(instance=workout,data=request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('Gymobile_app:day',
@@ -89,7 +89,7 @@ def edit_exercise(request,workout_id):
 
 @login_required
 def delete_exercise(request,day_id):
-    workout = Workout.objects.get(id=workout_id)
+    workout = Exercies.objects.get(id=workout_id)
     day = workout.day
     if day.owner !=request.user:
         raise Http404

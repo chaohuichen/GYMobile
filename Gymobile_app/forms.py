@@ -1,16 +1,16 @@
 from django import forms
 
-from .models import Day,Workout
+from .models import WorkoutLog,Exercies
 
-class DayForm(forms.ModelForm):
+class WorkoutLogForm(forms.ModelForm):
     class Meta:
-        model =Day
+        model =WorkoutLog
         fields = ['day']
         labels = {'text':''}
 
-class WorkoutForm(forms.ModelForm):
+class ExerciesForm(forms.ModelForm):
     class Meta:
-        model = Workout
-        fields = ['exercise']
+        model = Exercies
+        fields = ['bodypart']
         labels = {'text':''}
         #widgets = {'text': forms.Textarea(attrs={'cols': 80})}
