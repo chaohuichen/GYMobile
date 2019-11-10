@@ -1,19 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import datetime,timedelta
+from django.template.defaultfilters import date
+
 # Create your models here.
 
 class WorkoutLog(models.Model):
-    "A day the user is having"
     #day = models.DateTimeField(default=datetime.now()+timedelta(days=30))
-
     day = models.PositiveIntegerField(default=0)
     date_added = models.DateTimeField(auto_now_add=True)
     #routine = models.ForeignKey(Routine,on_delete=models.CASCADE)
     owner = models.ForeignKey(User,on_delete=models.CASCADE)
     def __str__(self):
         "..return"
-        return 'Workout Day '+str(self.day)
+        return '%s' % date(self.date_added,"n/j/Y")
 
 class Routine(models.Model):
     """docstring for WorkoutLog."""
@@ -25,7 +24,7 @@ class Routine(models.Model):
         return 'Routine '+str(self.RoutineName)
 
 
-class Exercies(models.Model):
+class Exercise(models.Model):
     "workout type"
     Back='Back Exercies'
     Leg='Legs Exercies'
@@ -38,7 +37,7 @@ class Exercies(models.Model):
     (Chest,'Chest'),
     ]
 
-    day = models.ForeignKey(WorkoutLog,on_delete=models.CASCADE)
+    workoutlog = models.ForeignKey(WorkoutLog,on_delete=models.CASCADE)
     category = models.CharField(
     max_length = 15
     )

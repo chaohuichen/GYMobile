@@ -4,11 +4,15 @@ from . import views
 app_name='Gymobile_app'
 
 urlpatterns = [
+	#homepage
 	path('', views.index,name='index'),
-	path('days/', views.days, name='days'),
-	path('days/(P<day_id>\d+)', views.day, name='day'),
 
-	path('new_day/', views.new_day, name='new_day'),
+	#workoutlogs page#
+	path('workoutlogs/', views.workoutlogs, name='workoutlogs'),
+
+	path('workouts/(P<workoutlog_id>\d+)', views.workoutlog, name='workoutlog'),
+
+	path('new_log/', views.new_log, name='new_log'),
 
 	path('new_exercise/(P<day_id>\d+)', views.new_exercise, name='new_exercise'),
 
