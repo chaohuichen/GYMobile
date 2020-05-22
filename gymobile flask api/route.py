@@ -3,8 +3,11 @@ import pickle
 app = Flask(__name__)
 
 #loading sample data from data.py and turn it into <users> (it is a list)
-with open('data.pkl', 'rb') as load:
-    users = pickle.load(load)
+with open('data.pkl', 'rb') as user_load:
+    users = pickle.load(user_load)
+
+with open('exercise.pkl','rb') as exe_load:
+    exercises = pickle.load(exe_load)
 
 #get route (for all users)
 @app.route('/api/users', methods=['GET'])
@@ -22,7 +25,12 @@ def get_user(user_id):
     return jsonify({'user': user[0]})
 
 #get route (for single user's exercise)
-@app.route('/api/user')
+@app.route('/api/user/<int:user_id>/exercises', methods=['GET'])
+def get_exercise(user_id):
+    if len(user) == 0:
+        abort(404)
+    else:
+
 
 #post route
 @app.route('/api/user', methods=['POST'])
@@ -40,6 +48,8 @@ def create_user():
     }
     users.append(user)
     return jsonify({'user': user}), 201
+
+
 
 #put route
 @app.route('/api/user/<int:user_id>', methods=['PUT'])
