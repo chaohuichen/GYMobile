@@ -6,24 +6,27 @@ app = Flask(__name__)
 with open('data.pkl', 'rb') as load:
     users = pickle.load(load)
 
-#get route (for all user)
+#get route (for all users)
 @app.route('/api/users', methods=['GET'])
-def index():
+def users():
     return jsonify({
         'users' : users
     })
     
 #get route (for single user)
-@app.route('/api/users/<int:user_id>', methods=['GET'])
-def get_task(user_id):
+@app.route('/api/user/<int:user_id>', methods=['GET'])
+def get_user(user_id):
     user = [user for user in users if user['id'] == user_id]
     if len(user) == 0:
         abort(404)
     return jsonify({'user': user[0]})
 
+#get route (for single user's exercise)
+@app.route('/api/user')
+
 #post route
-@app.route('/api/users', methods=['POST'])
-def create_task():
+@app.route('/api/user', methods=['POST'])
+def create_user():
     if not request.json or not 'Email' in request.json:
         abort(400)
     user = {
@@ -39,8 +42,8 @@ def create_task():
     return jsonify({'user': user}), 201
 
 #put route
-@app.route('/api/users/<int:user_id>', methods=['PUT'])
-def update_task(user_id):
+@app.route('/api/user/<int:user_id>', methods=['PUT'])
+def update_user(user_id):
     user = [user for user in users if user['ID'] == user_id]
     if len(user) == 0:
         abort(404)
@@ -54,8 +57,8 @@ def update_task(user_id):
     return jsonify({'user': user[0]})
 
 #delete route
-@app.route('/api/users/<int:user_id>', methods=['DELETE'])
-def delete_task(user_id):
+@app.route('/api/user/<int:user_id>', methods=['DELETE'])
+def delete_user(user_id):
     user = [user for user in users if user['ID'] == user_id]
     if len(user) == 0:
         abort(404)

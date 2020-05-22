@@ -1,0 +1,5 @@
+avaliable routes for this api:
+
+/api/users
+/api/user
+/api/user/<int:user_id>
