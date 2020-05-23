@@ -23,40 +23,40 @@ users = [
   ]
 
 exercises = [
-    userid: 1,
-    exercises:{
-      {
-        "Exercise_id": 1,
-        "Name": "push up", 
-        "BodyPart": "", 
-        "Category": "",
-        "Description": "None"
-      }, 
-      {
-        "Exercise_id": 2,
-        "Name": "set up", 
-        "BodyPart": "", 
-        "Category": "",
-        "Description": "None"
-      },
+    {
+      "Exercise_id": 1,
+      'userid' : 1,
+      "Name": "push up", 
+      "BodyPart": "", 
+      "Category": "",
+      "Description": "None",
     }
-    
-    user_id : 2,
-    exercise : {
-      {
-        "Exercise_id": 1,
-        "Name": "swimming", 
-        "BodyPart": "full", 
-        "Category": "",
-        "Description": "None"
-      },
-      {
-        "Exercise_id": 2,
-        "Name": "running", 
-        "BodyPart": "lower", 
-        "Category": "",
-        "Description": "None"
-      }
+    ,
+    {
+      "Exercise_id": 2,
+      'userid' : 1,
+      "Name": "set up", 
+      "BodyPart": "", 
+      "Category": "",
+      "Description": "None",
+    }
+    ,
+    {
+      "Exercise_id": 1,
+      'user_id' : 2,
+      "Name": "swimming", 
+      "BodyPart": "full", 
+      "Category": "",
+      "Description": "None"
+    }
+    ,
+    {
+      "Exercise_id": 2,
+      'user_id' : 2,
+      "Name": "running", 
+      "BodyPart": "lower", 
+      "Category": "",
+      "Description": "None"
     }
   ]
 
