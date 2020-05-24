@@ -30,6 +30,10 @@ def get_exercise(user_id):
     if len(user) == 0:
         abort(404)
     else:
+        if len(exercise) == 0:
+            return jsonify({'exercises': 'None'})
+        else:
+            return jsonify({'exericses': exercise})
 
 
 #post route
